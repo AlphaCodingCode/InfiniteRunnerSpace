@@ -54,33 +54,61 @@ class Backdrop {
     constructor(color, starCount, scrollSpeed) {
         this.color = color;
         this.scrollSpeed = scrollSpeed;
+        this.gravity = 0.01;
         this.stars = [];
         this.starCount = starCount;
         for (let i = 0; i < starCount; i++) {
-            this.stars.push(new Star(random(width / 3, width), random(0, height - height / 4), random(10, 15), this));
+            this.stars.push(new Star(random(width / 3, width + width / 3), random(0, height - height / 4), random(10, 15), this));
 
         }
-        this.gravity = 0.01;
+        this.xOff = 0;
+        this.weight = 300;
+        this.increment = 0.01;
+
     }
 
     update() {
         for (let i = this.stars.length - 1; i >= 0; i--) {
             this.stars[i].update();
-        //    console.log(this.stars[i].velocity.y);
             if (this.stars[i].x < 20 || this.stars[i].y >= height + 20) {
                 this.stars.splice(i, 1);
             }
         }
         for (let i = this.stars.length; i <= this.starCount; i++) {
-            this.stars.push(new Star(random(width / 3, width), random(0, height - height / 4), random(10, 15), this));
+            this.stars.push(new Star(random(width / 3, width + width / 3), random(0, height - height / 4), random(10, 15), this));
         }
-        console.log(this.stars[0].color);
+        this.xOff += this.increment * this.scrollSpeed;
     }
 
     render() {
+        // draw stars
         background(this.color);
+        noStroke();
         for (let i = 0; i < this.stars.length; i++) {
             this.stars[i].render();
         }
+
+        // draw terrain bottom
+        stroke(255);
+        strokeWeight(10);
+        noFill();
+        beginShape();
+        for (let i = 0; i < width; i++) {
+            let y = noise(this.xOff + (0.01 * i)) * this.weight;
+            vertex(i, y + 3 * height / 4);
+        }
+        endShape();
+
+        // draw terrain top
+        beginShape();
+        for (let i = 0; i < width; i++) {
+            let y = noise(this.xOff + (0.01 * i) + 10000) * this.weight;
+            vertex(i, y);
+        }
+        endShape();
+
+        // draw obstacles
+
+
     }
 }
