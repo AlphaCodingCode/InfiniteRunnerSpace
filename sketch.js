@@ -2,7 +2,7 @@ let world;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
-    world = new Backdrop(color(20, 20, 20), 100, 10);
+    world = new Backdrop(color(20, 20, 20), 5, 10);
     console.log(world);
 }
 
