@@ -1,9 +1,11 @@
 let world;
+let player;
+let GAMEOVER = false;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
     world = new Backdrop(color(20, 20, 20), 5, 10);
-    console.log(world);
+    player = new Ship(100, 100, world);
 }
 
 /*
@@ -12,8 +14,16 @@ function setup() {
 function draw() {
     // Update
     world.update();
+    player.update();
     // Render
     world.render();
+    player.render();
+
+    if (GAMEOVER) {
+        gameOver();
+        noLoop();
+    }
+
 }
 
 
@@ -24,4 +34,12 @@ function mouseClicked() {
     else
         loop();
     state = !state;
+}
+
+
+function gameOver() {
+    fill(255);
+    textAlign(CENTER);
+    textSize(50);
+    text("GAME OVER!", width / 2, height / 2);
 }
