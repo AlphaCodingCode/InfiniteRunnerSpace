@@ -1,6 +1,6 @@
 class Ship {
-    constructor(x, y, env) {
-        this.x = 100;
+    constructor(env) {
+        this.x = 200;
         this.y = height / 2;
         this.env = env;
         this.accY = 0;
@@ -106,6 +106,22 @@ class Ship {
         vertex(x - 23, y + 40);
         vertex(x - 23, y + 10);
         endShape(CLOSE);
+
+        // tail flame
+        stroke(200, 0, 0);
+        let randFlame = random();
+        fill(200, 200, 0);
+        beginShape();
+        vertex(x - 28, y + 12);
+        vertex(x - 28 - random(20, 30), y + 24);
+        vertex(x - 28, y + 35);
+        endShape();
+
+        noStroke();
+        textSize(12);
+        textAlign(CENTER);
+        fill(100, 0, 0);
+        text("NASA", x + 20, y + 27);
     }
 
     render() {
