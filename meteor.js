@@ -6,18 +6,20 @@ class Meteor {
         this.env = env;
 
         this.velocity = createVector(-env.scrollSpeed, 0);
-        
+
         /* Formula for a point in an ellipse where a and b are the width and height and a == b */
         // x = a * cos(θ)
         // y = b * sin(θ)
         let vertices = random(4, 15);
         this.vertices = [];
+        this.canvasVertices = [];
         for (let i = 0; i < vertices; i++) {
             let theta = ((2 * Math.PI) / vertices) * i;
             let randInfluence = random(-size / 2, size / 2);
             let x = (this.size + randInfluence) * Math.cos(theta);
             let y = (this.size + randInfluence) * Math.sin(theta);
             this.vertices.push({x : x, y : y, angle : theta, inf : randInfluence});
+            this.canvasVertices.push({x : x + this.x, y : y + this.y});
         }
     }
 
@@ -35,6 +37,8 @@ class Meteor {
             this.vertices[i].x = x;
             this.vertices[i].y = y;
             this.vertices[i].angle = theta;
+            this.canvasVertices[i].x = x + this.x;
+            this.canvasVertices[i].y = y + this.y;
         }
     }
 
