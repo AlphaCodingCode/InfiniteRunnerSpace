@@ -18,10 +18,20 @@ class Ship {
         }
 
         for (let i = this.bullets.length - 1; i >= 0; i--) {
+            // bullet out of bounds
             if (this.bullets[i].x > width) {
                 this.bullets.splice(i, 1);
             } else {
+                // move bullet
                 this.bullets[i].x += 10;
+
+                // check if bullet has collided with a meteor
+                for (let j = 0; j < meteors.length; j++) {
+                    if (collideCirclePoly(this.bullets[i].x, this.bullets[i].y, 52, meteors[j].canvasVertices)) {
+                        this.bullets.splice(i, 1);
+                        break;
+                    }
+                }
             }
         }
     }
@@ -47,6 +57,13 @@ class Ship {
 
         // weapons
         this.weaponSystems();
+        // check if player has collided with a meteor
+        for (let j = 0; j < meteors.length; j++) {
+            if (collideCirclePoly(this.x + 10, this.y + 25, 70, meteors[j].canvasVertices, true)) {
+                GAMEOVER = true;
+                return;
+            }
+        }
 
         // collision with walls
         let topWallPoints = [];
@@ -60,6 +77,7 @@ class Ship {
             botWallPoints.push({x : i, y : y1 + 3 * height / 4});
         }
 
+        // collision with walls
         for (let i = 0; i < topWallPoints.length; i++) {
             if (dist(this.x + 10, this.y + 25, topWallPoints[i].x, topWallPoints[i].y) <= 35) {
                 GAMEOVER = true;
