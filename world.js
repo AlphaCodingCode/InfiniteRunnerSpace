@@ -70,10 +70,13 @@ class Backdrop {
     update() {
         for (let i = this.stars.length - 1; i >= 0; i--) {
             this.stars[i].update();
+            // remove stars that are out of bounds
             if (this.stars[i].x < 20 || this.stars[i].y >= height + 20) {
                 this.stars.splice(i, 1);
             }
         }
+
+        // create new stars to stay at the maximum star count
         for (let i = this.stars.length; i <= this.starCount; i++) {
             this.stars.push(new Star(random(width / 3, width + width / 3), random(0, height - height / 4), random(10, 15), this));
         }
@@ -106,9 +109,5 @@ class Backdrop {
             vertex(i, y);
         }
         endShape();
-
-        // draw obstacles
-
-
     }
 }

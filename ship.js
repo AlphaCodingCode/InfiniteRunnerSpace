@@ -150,35 +150,5 @@ class Ship {
             ellipse(this.bullets[i].x, this.bullets[i].y, 5, 5);
         }
         this.drawShip(this.x, this.y);
-
-        // let topWallPoints = [];
-        // let botWallPoints = [];
-        // for (let i = this.x - 25; i < this.x + 45; i++) {
-        //     let y1 = noise(this.env.xOff + (0.01 * i)) * this.env.weight;
-        //     let y2 = noise(this.env.xOff + (0.01 * i) + 10000) * this.env.weight;
-        //     topWallPoints.push({x : i, y : y2});
-        //     botWallPoints.push({x : i, y : y1 + 3 * height / 4});
-        // }
-        //
-        // console.log(topWallPoints.length, botWallPoints.length);
-        // stroke(0, 200, 0);
-        // strokeWeight(10);
-        // for (let i = 0; i < topWallPoints.length; i++) {
-        //     point(topWallPoints[i].x, topWallPoints[i].y);
-        //     point(botWallPoints[i].x, botWallPoints[i].y);
-        //     if (dist(this.x + 10, this.y + 25, topWallPoints[i].x, topWallPoints[i].y) <= 35) {
-        //          stroke(0, 0, 255);
-        //          point(topWallPoints[i].x, topWallPoints[i].y);
-        //          return;
-        //     } else if (dist(this.x + 10, this.y + 25, botWallPoints[i].x, botWallPoints[i].y) <= 35) {
-        //         stroke(0, 0, 255);
-        //         point(botWallPoints[i].x, botWallPoints[i].y);
-        //         return;
-        //     }
-        // }
     }
-
-
-
-
 }

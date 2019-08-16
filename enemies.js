@@ -30,7 +30,6 @@ class Enemy {
         if (dist(player.x + 10, player.y + 25, this.x, this.y + 10) <= (35 + 35)) {
             // crashed
             this.crashed = true;
-            console.log("collided with enemy");
             return;
         }
         // if enemy collided with a bullet
